@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "PokemonEffectivenessApp": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}
