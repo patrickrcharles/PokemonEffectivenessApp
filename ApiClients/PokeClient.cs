@@ -1,0 +1,53 @@
+﻿using PokemonEffectivenessApp.Models;
+using System.Net.Http.Json;
+
+namespace PokemonEffectivenessApp.ApiClients
+{
+    public class PokeApiClient : IPokeApiClient
+    {
+        private readonly HttpClient _http;
+        private readonly string _baseUrl = "https://pokeapi.co/api/v2";
+        public PokeApiClient(HttpClient http)
+        {
+            _http = http;
+        }
+
+        public async Task<PokemonDto?> GetPokemonAsync(string name)
+        {
+            var url = new Uri(_baseUrl + $"/pokemon/{name}");
+            try
+            {
+                var res = await _http.GetAsync(url);
+                if (!res.IsSuccessStatusCode)
+                    throw new HttpRequestException($"Failed to fetch Pokémon '{name}'. Status code: {res.StatusCode}");
+
+                var content = await res.Content.ReadFromJsonAsync<PokemonDto>();
+
+                return content;
+            }
+            catch (Exception ex) { 
+                Console.WriteLine("Error : " + ex.Message);
+                return default;
+            }
+        }
+
+        public async Task<TypeDto?> GetTypeByUrlAsync(string url)
+        {
+            try
+            {
+                var res = await _http.GetAsync(url.Trim());
+                if (!res.IsSuccessStatusCode)
+                    throw new HttpRequestException($"Failed to fetch Type from URL '{url}', status code: {res.StatusCode}");
+
+                var content = await res.Content.ReadFromJsonAsync<TypeDto>();
+
+                return content;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error : " + ex.Message);
+                return default;
+            }
+        }
+    }
+}
