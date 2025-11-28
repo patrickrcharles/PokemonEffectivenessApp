@@ -4,45 +4,32 @@ namespace PokemonEffectivenessApp.Services;
 
 public class TypeEffectivenessService : ITypeEffectivenessService
 {
-    public void ApplyTypeRelations(TypeDto typeDto, CombinedEffectivenessDTO combined)
+    public void ApplyTypeRelations(TypeDto dto, CombinedEffectivenessDTO combined)
     {
-        ArgumentNullException.ThrowIfNull(typeDto);
+        ArgumentNullException.ThrowIfNull(dto);
         ArgumentNullException.ThrowIfNull(combined);
 
-        // Define sources for strong and weak relations
-        var strong = new[]
-        {
-        typeDto.DamageRelations.DoubleDamageTo,
-        typeDto.DamageRelations.HalfDamageFrom,
-        typeDto.DamageRelations.NoDamageFrom
-        };
+        var r = dto.DamageRelations;
 
-        var weak = new[]
-        {
-        typeDto.DamageRelations.DoubleDamageFrom,
-        typeDto.DamageRelations.HalfDamageTo,
-        typeDto.DamageRelations.NoDamageTo
-        };
+        // === STRONG AGAINST ===
+        foreach (var x in r.DoubleDamageTo)
+            combined.StrongAgainst.Add(x.Name);
 
-        // Strong Against: add only if not already Weak
-        foreach (var list in strong)
-        {
-            foreach (var t in list)
-            {
-                if (!string.IsNullOrWhiteSpace(t.Name) && !combined.WeakAgainst.Contains(t.Name))
-                    combined.StrongAgainst.Add(t.Name);
-            }
-        }
+        foreach (var x in r.NoDamageFrom)
+            combined.StrongAgainst.Add(x.Name);
 
-        // Weak Against: add only if not already Strong
-        foreach (var list in weak)
-        {
-            foreach (var t in list)
-            {
-                if (!string.IsNullOrWhiteSpace(t.Name) && !combined.StrongAgainst.Contains(t.Name))
-                    combined.WeakAgainst.Add(t.Name);
-            }
-        }
+        foreach (var x in r.HalfDamageFrom)
+            combined.StrongAgainst.Add(x.Name);
+
+        // === WEAK AGAINST ===
+        foreach (var x in r.NoDamageTo)
+            combined.WeakAgainst.Add(x.Name);
+
+        foreach (var x in r.HalfDamageTo)
+            combined.WeakAgainst.Add(x.Name);
+
+        foreach (var x in r.DoubleDamageFrom)
+            combined.WeakAgainst.Add(x.Name);
     }
 }
 

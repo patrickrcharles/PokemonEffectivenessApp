@@ -7,12 +7,12 @@ internal static class Program
 {
     private static async Task Main(string[] args)
     {
-
+        // update services
         var services = new ServiceCollection();
         services.AddSingleton<HttpClient>();
         services.AddSingleton<IPokeApiClient, PokeApiClient>();
         services.AddSingleton<ITypeEffectivenessService, TypeEffectivenessService>();
-
+        // dependency injection
         using var serviceProvider = services.BuildServiceProvider();
         var apiClient = serviceProvider.GetRequiredService<IPokeApiClient>();
         var effectivenessService = serviceProvider.GetRequiredService<ITypeEffectivenessService>();
