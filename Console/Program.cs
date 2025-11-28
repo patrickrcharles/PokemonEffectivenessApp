@@ -23,43 +23,40 @@ internal static class Program
             {
                 Console.Write("\nEnter Pokémon name: ");
                 var input = Console.ReadLine()?.Trim();
-
+                // check for bad input
                 if (string.IsNullOrWhiteSpace(input))
                 {
                     Console.WriteLine("Invalid Pokémon name.");
                     continue;
                 }
+                // exit
                 if (input.Equals("exit"))
                 {
                     Console.WriteLine("goodbye...");
                     break;
                 }
-
+                
                 var pokemon = await apiClient.GetPokemonAsync(input.ToLower());
+                // verify pokemon input
                 if (pokemon == null || pokemon.Types.Count == 0)
                 {
                     Console.WriteLine($"Pokémon '{input}' not found or has no types.");
                     continue;
                 }
-
+                // get all pokemon types. pokemon can have multiple types
                 var combined = new CombinedEffectivenessDTO
                 {
                     Name = pokemon.Name,
                     Types = pokemon.Types.Select(t => t.Type.Name)
                 };
-
-                // Fetch all type DTOs concurrently
-                var typeDtos = await Task.WhenAll(
-                    pokemon.Types.Select(t => apiClient.GetTypeByUrlAsync(t.Type.Url))
-                );
-
-                // Apply type relations for each successfully fetched type
-                foreach (var typeDto in typeDtos.Where(t => t != null))
+                // get type relations for each pokemon type and apply effectivenesses
+                foreach (var t in pokemon.Types)
                 {
-                    effectivenessService.ApplyTypeRelations(typeDto!, combined);
+                    var typeDto = await apiClient.GetTypeByUrlAsync(t.Type.Url);
+                    if (typeDto != null) 
+                        effectivenessService.ApplyTypeRelations(typeDto, combined);
                 }
-
-
+                
                 DisplayEffectiveness(combined);
             }
             catch (HttpRequestException ex)
