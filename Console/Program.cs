@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using PokemonEffectivenessApp.ApiClients;
+using PokemonEffectivenessApp.ApiClient;
 using PokemonEffectivenessApp.Models;
 using PokemonEffectivenessApp.Services;
 
@@ -11,11 +11,11 @@ internal static class Program
         var services = new ServiceCollection();
         services.AddSingleton<HttpClient>();
         services.AddSingleton<IPokeApiClient, PokeApiClient>();
-        services.AddSingleton<ITypeEffectivenessService, TypeEffectivenessService>();
+        services.AddSingleton<IPokemonTypeEffectivenessService, PokemonTypeEffectivenessService>();
         // dependency injection
         using var serviceProvider = services.BuildServiceProvider();
         var apiClient = serviceProvider.GetRequiredService<IPokeApiClient>();
-        var effectivenessService = serviceProvider.GetRequiredService<ITypeEffectivenessService>();
+        var effectivenessService = serviceProvider.GetRequiredService<IPokemonTypeEffectivenessService>();
 
         while (true)
         {
