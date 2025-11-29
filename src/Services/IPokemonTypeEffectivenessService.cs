@@ -1,6 +1,6 @@
-﻿using PokemonEffectivenessApp.Models;
+﻿using PokemonEffectivenessApp.src.Models;
 
-namespace PokemonEffectivenessApp.Services;
+namespace PokemonEffectivenessApp.src.Services;
 
 public interface IPokemonTypeEffectivenessService
 {

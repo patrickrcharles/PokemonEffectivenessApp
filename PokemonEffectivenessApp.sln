@@ -7,9 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonEffectivenessApp", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PokemonEffectivenessTests", "..\PokemonEffectivenessTests\PokemonEffectivenessTests.csproj", "{4665DB9B-D0AA-412A-B29D-8AA3406D7DFF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{DBD74EE3-1C21-452B-9987-398F567176BD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PokemonApp", "PokemonApp", "{03F33C01-31F6-477D-A841-1B6AD419EE34}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,8 +28,8 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{6DB46965-9886-40A8-A076-8922315A6032} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
-		{4665DB9B-D0AA-412A-B29D-8AA3406D7DFF} = {DBD74EE3-1C21-452B-9987-398F567176BD}
+		{6DB46965-9886-40A8-A076-8922315A6032} = {03F33C01-31F6-477D-A841-1B6AD419EE34}
+		{4665DB9B-D0AA-412A-B29D-8AA3406D7DFF} = {03F33C01-31F6-477D-A841-1B6AD419EE34}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D250255C-10AB-480A-9276-21B86DF87B0F}
