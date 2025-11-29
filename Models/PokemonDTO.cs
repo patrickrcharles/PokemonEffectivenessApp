@@ -7,10 +7,10 @@ namespace PokemonEffectivenessApp.Models
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         [JsonPropertyName("types")]
-        public List<PokemonTypeInfo> Types { get; init; } = new();
+        public List<PokemonTypesList> Types { get; init; } = new();
     }
 
-    public class PokemonTypeInfo
+    public class PokemonTypesList
     {
         [JsonPropertyName("type")]
         public PokemonType Type { get; init; } = new();

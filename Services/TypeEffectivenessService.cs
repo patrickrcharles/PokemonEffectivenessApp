@@ -4,7 +4,7 @@ namespace PokemonEffectivenessApp.Services;
 
 public class TypeEffectivenessService : ITypeEffectivenessService
 {
-    public void ApplyTypeRelations(TypeDto dto, CombinedEffectivenessDTO combined)
+    public void ApplyTypeRelations(TypesDto dto, CombinedEffectivenessDTO combined)
     {
         ArgumentNullException.ThrowIfNull(dto);
         ArgumentNullException.ThrowIfNull(combined);

@@ -2,7 +2,7 @@
 
 namespace PokemonEffectivenessApp.Models
 {
-    public class TypeDto
+    public class TypesDto
     {
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;

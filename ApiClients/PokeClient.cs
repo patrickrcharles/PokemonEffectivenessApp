@@ -26,7 +26,7 @@ namespace PokemonEffectivenessApp.ApiClients
             }
         }
 
-        public async Task<TypeDto?> GetTypeByUrlAsync(string url)
+        public async Task<TypesDto?> GetTypeByUrlAsync(string url)
         {
             try
             {
@@ -34,7 +34,7 @@ namespace PokemonEffectivenessApp.ApiClients
                 if (!res.IsSuccessStatusCode)
                     throw new HttpRequestException($"Failed to fetch Type from URL '{url}', status code: {res.StatusCode}");
 
-                var content = await res.Content.ReadFromJsonAsync<TypeDto>();
+                var content = await res.Content.ReadFromJsonAsync<TypesDto>();
                 return content;
             }
             catch (Exception ex)

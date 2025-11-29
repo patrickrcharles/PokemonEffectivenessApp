@@ -4,6 +4,6 @@ namespace PokemonEffectivenessApp.Services;
 
 public interface ITypeEffectivenessService
 {
-    void ApplyTypeRelations(TypeDto typeDto, CombinedEffectivenessDTO combined);
+    void ApplyTypeRelations(TypesDto typeDto, CombinedEffectivenessDTO combined);
 }
 
