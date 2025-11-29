@@ -17,6 +17,7 @@ internal static class Program
         var apiClient = serviceProvider.GetRequiredService<IPokeApiClient>();
         var effectivenessService = serviceProvider.GetRequiredService<IPokemonTypeEffectivenessService>();
 
+        Console.Write("Enter Pokémon name or type 'exit' to quit\n");
         while (true)
         {
             try
